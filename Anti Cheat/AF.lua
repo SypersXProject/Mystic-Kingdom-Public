@@ -6,10 +6,8 @@ a.Heartbeat:Connect(function(e)
 	for _, f in pairs(b:GetPlayers()) do
 		local g = f.Character
 		if not g then continue end
-
 		local h = g:FindFirstChild(string.char(72,117,109,97,110,111,105,100))
 		if not h then continue end
-
 		local i = c[f.Name]
 		if not i then
 			c[f.Name] = {
@@ -18,8 +16,7 @@ a.Heartbeat:Connect(function(e)
 			}
 			continue
 		end
-
-		if h[string.char(70,108,111,111,114,77,97,116,101,114,105,97,108)] == Enum.Material.Air then -- "FloorMaterial"
+		if h[string.char(70,108,111,111,114,77,97,116,101,114,105,97,108)] == Enum.Material.Air then
 			c[f.Name].TimeAirborne += e
 			if c[f.Name].TimeAirborne > d then
 				c[f.Name].TimeAirborne = 0
