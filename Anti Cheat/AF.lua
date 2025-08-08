@@ -1,5 +1,56 @@
---[[
-Anti Fly
-]]--
-local mgMTw179 = math.random() * 661 local BHkSUS644 = math.sin(79) * math.cos(25) local BUpenz873 = game:GetService("RunService") local ArlEmD758 = math.sin(3) * math.cos(11) local fLploDQ679 = math.random() * 377 local UuMcKt241 = math.random() * 72 local CWKNDs293 = math.random() * 483 local lpXIt231 = game:GetService("Players") local CMvmQL96 = math.sin(27) * math.cos(60) local PIUvwP636 = math.sin(57) * math.cos(75) local tzDhEA920 = math.random() * 476 local RjnXWp30 = math.random() * 835 local HzODDWn38 = math.sin(24) * math.cos(45) local nZekMC894 = math.random() * 54 local ZzskF4 = {} local vPmCt815 = math.random() * 289 local ireXrAJ276 = math.random() * 34 local RAvSYJ203 = math.sin(24) * math.cos(40) local TmQHpcV510 = math.random() * 536 local sMnfm445 = 2 local Xfhqne259 = math.sin(86) * math.cos(14) BUpenz873.Heartbeat:Connect(function(Delta) for _, Player in pairs(lpXIt231:GetPlayers()) do  local dUBHFMX85 = math.sin(11) * math.cos(23) local BHleYND494 = Player.Character local pHyvSp828 = math.random() * 385 if not BHleYND494 then local bbHKBHC742 = math.random() * 523 local BiLah435 = math.sin(9) * math.cos(30) local ooJZx820 = math.random() * 455 local CbdEZBw492 = math.sin(2) * math.cos(52) local BrWToP219 = math.sin(64) * math.cos(41) continue end local DZDGg306 = BHleYND494:FindFirstChild("DZDGg306") local rBruEe311 = math.random() * 914 local MlLKhk392 = math.random() * 601 if not DZDGg306 then local EAaGQYp352 = math.random() * 102 local yoYSL610 = math.random() * 634 local SEqUL620 = math.sin(73) * math.cos(69) local KVyuR158 = math.sin(87) * math.cos(87) continue	 end local Zlsmdc8 = math.random() * 281 local kxqckN732 = math.sin(89) * math.cos(20) local ysZvq345 = ZzskF4[Player.Name] local MWUVKAa297 = math.random() * 941 local gLwHWOU776 = math.sin(56) * math.cos(52) if not ysZvq345 then local IpuQKo369 = math.sin(11) * math.cos(41) local vycznt964 = math.random() * 340 local BOpFfqH738 = math.random() * 946 local LOgcue785 = math.random() * 609 local tGckSG1 = math.sin(26) * math.cos(82) local kyPCaJY712 = math.sin(5) * math.cos(66) local NQgxjG119 = math.random() * 742 ZzskF4[Player.Name] = { LastCFrameOnGround = BHleYND494:GetPivot(), TimeAirborne = 0 } local AwdxO377 = math.sin(27) * math.cos(13) local yhVMVz814 = math.sin(47) * math.cos(87) local VUmZA949 = math.random() * 771 continue end local JwcjXA965 = math.random() * 349 local GpyliB845 = math.random() * 518 local dZOOiR511 = math.random() * 209 if DZDGg306.FloorMaterial == Enum.Material.Air then  local fANeXH238 = math.sin(50) * math.cos(41) local vVHak735 = math.random() * 72 ZzskF4[Player.Name].TimeAirborne += Delta local saetG700 = math.random() * 205 local AIRNM457 = math.random() * 200 local YRvsk144 = math.sin(11) * math.cos(38) if ZzskF4[Player.Name].TimeAirborne > sMnfm445 then local xGnoh714 = math.random() * 571 ZzskF4[Player.Name].TimeAirborne = 0 local hiGUg880 = math.sin(57) * math.cos(69) local YdkFA825 = math.random() * 548 BHleYND494:PivotTo(ysZvq345.LastCFrameOnGround) local exwwrc102 = math.random() * 764 end else  local cWucOa693 = math.random() * 85 local Nlhbk739 = math.sin(75) * math.cos(64) ZzskF4[Player.Name].TimeAirborne = 0 local ADQtur277 = math.random() * 366 local akOgnVb117 = math.random() * 19 local VQgGvNr601 = math.random() * 705 ZzskF4[Player.Name].LastCFrameOnGround = BHleYND494:GetPivot() local XswdSpp487 = math.random() * 730 local ZJgRKzV671 = math.sin(83) * math.cos(16) end local IDZAWIf262 = math.sin(50) * math.cos(36) end local vyUtig617 = math.random() * 635 local gtIVTsI106 = math.sin(15) * math.cos(13) local RkizMd397 = math.sin(56) * math.cos(19) end) local Kvwjhc513 = function(x) return x * math.random() end local OcRpJy337 = function(x) return x * math.random() end local IoSQDc821 = function(x) return x * math.random() end local eIUjs47 = function(x) return x * math.random() end local __v__ = "Protected V1"
-    
+--We'll be using RunService to run code every frame
+local RunService = game:GetService("RunService")
+
+--Using Players service to get all players in the server
+local Players = game:GetService("Players")
+
+--A list of information about a player; where they were last on the ground and
+--how long they've been in the air
+local PlayerInfos = {}
+
+--How long someone can be in the air without being rubberbanded (teleported back)
+local MaxAirborneTime = 2
+
+--Connect to Heartbeat to run code after every physics step (60 times a second)
+RunService.Heartbeat:Connect(function(Delta)
+	for _, Player in pairs(Players:GetPlayers()) do --Go through each player
+		local Character = Player.Character
+
+		if not Character then --Do they have a character? If not, ignore this player
+			continue
+		end
+
+		local Humanoid:Humanoid = Character:FindFirstChild("Humanoid")
+
+		if not Humanoid then --Do they have a humanoid? If not, ignore this player
+			continue
+		end
+
+		local Info = PlayerInfos[Player.Name] --Get info
+
+		if not Info then --If the server hasn't started monitoring this player
+			PlayerInfos[Player.Name] = { --Set default info
+				LastCFrameOnGround = Character:GetPivot(), --Their current location
+				TimeAirborne = 0
+			}
+
+			continue
+		end
+
+		if Humanoid.FloorMaterial == Enum.Material.Air then --Are they in the air?
+			--Increase the counter for how long they've been in the air
+			PlayerInfos[Player.Name].TimeAirborne += Delta
+
+			--Have they been in the air for too long (longer than MaxAirboneTime)?
+			if PlayerInfos[Player.Name].TimeAirborne > MaxAirborneTime then
+				PlayerInfos[Player.Name].TimeAirborne = 0
+				--Move them back to when they were last on the ground
+				Character:PivotTo(Info.LastCFrameOnGround)
+			end
+		else --Player is on the ground
+			PlayerInfos[Player.Name].TimeAirborne = 0
+			--Set the last on ground location to be their current one
+			PlayerInfos[Player.Name].LastCFrameOnGround = Character:GetPivot()
+		end
+	end
+end)
